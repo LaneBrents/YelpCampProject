@@ -63,6 +63,7 @@ passport.deserializeUser(User.deserializeUser()); //How to un-store the user fro
 
 // Universal Flash middleware
 app.use ((req, res, next) => {
+    res.locals.currentUser = req.user; //This allows me to make things show or not show, depending on the user signed in
     res.locals.success = req.flash('success');
     res.locals.error = req.flash('error');
     next();
