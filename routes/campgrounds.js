@@ -9,7 +9,7 @@ const Campground = require('../models/campground');
 //This renders the 'all campgrounds' page
 router.get('/', catchAsync(async (req, res) => {
     const campgrounds = await Campground.find({});
-    res.render('Campgrounds/index', {campgrounds})
+    res.render('Campgrounds/index', { campgrounds })
 }));
 
 // This renders the new campground form page
@@ -29,8 +29,13 @@ router.post('/', isLoggedIn, validateCampground, catchAsync(async (req, res, nex
 
 // This renders the campground info page
 router.get('/:id', catchAsync(async (req, res) => {
-    const campground = await Campground.findById(req.params.id).populate('reviews').populate('author');
-    if(!campground){
+    const campground = await Campground.findById(req.params.id).populate({
+        path: 'reviews',
+        populate: {
+            path: 'author'
+        }
+    }).populate('author');
+    if (!campground) {
         req.flash('error', 'Cannot Find That Campground');
         return res.redirect('/campgrounds');
     }
@@ -41,7 +46,7 @@ router.get('/:id', catchAsync(async (req, res) => {
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findById(id)
-    if(!campground){
+    if (!campground) {
         req.flash('error', 'Cannot Find That Campground');
         return res.redirect('/campgrounds');
     }
