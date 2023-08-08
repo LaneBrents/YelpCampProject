@@ -3,9 +3,11 @@ const router = express.Router();
 const campgrounds = require('../controllers/campgrounds');
 const catchAsync = require('../utils/catchAsync');
 const { isLoggedIn, isAuthor, validateCampground } = require('../middleware');
+const multer = require('multer');
+const { storage } = require('../cloudinary');
+const upload = multer({ storage });
 
 const Campground = require('../models/campground');
-
 
 //This renders the 'all campgrounds' page
 router.get('/', catchAsync(campgrounds.index));
@@ -14,7 +16,14 @@ router.get('/', catchAsync(campgrounds.index));
 router.get('/new', isLoggedIn, campgrounds.renderNewForm);
 
 // This sends a POST request from the new campground form page
-router.post('/', isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground))
+// router.post('/', isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground))
+
+router.route('/')
+    .post(upload.array('image'), (req, res) => {
+        console.log(req.body, req.files);
+        res.send("it worked!")
+    })
+
 
 // This renders the campground info page
 router.get('/:id', catchAsync(campgrounds.showCampground));
