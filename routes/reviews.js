@@ -9,7 +9,6 @@ const ExpressError = require('../utils/ExpressError');
 const catchAsync = require('../utils/catchAsync');
 const review = require('../models/review');
 
-
 // This allows us to create a revierw on a campground/:id
 router.post('/', isLoggedIn, validateReview, catchAsync(reviews.createReview));
 
