@@ -16,13 +16,7 @@ router.get('/', catchAsync(campgrounds.index));
 router.get('/new', isLoggedIn, campgrounds.renderNewForm);
 
 // This sends a POST request from the new campground form page
-// router.post('/', isLoggedIn, validateCampground, catchAsync(campgrounds.createCampground))
-
-router.route('/')
-    .post(upload.array('image'), (req, res) => {
-        console.log(req.body, req.files);
-        res.send("it worked!")
-    })
+router.post('/', isLoggedIn, upload.array('image'), validateCampground, catchAsync(campgrounds.createCampground))
 
 
 // This renders the campground info page
