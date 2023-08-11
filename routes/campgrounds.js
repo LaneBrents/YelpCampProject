@@ -26,7 +26,7 @@ router.get('/:id', catchAsync(campgrounds.showCampground));
 router.get('/:id/edit', isLoggedIn, isAuthor, catchAsync(campgrounds.renderEditForm));
 
 // This allows a user to update a campground
-router.put('/:id', isLoggedIn, isAuthor, validateCampground, catchAsync(campgrounds.updateCampground));
+router.put('/:id', isLoggedIn, isAuthor, upload.array('image'), validateCampground, catchAsync(campgrounds.updateCampground));
 
 // This deletes a campground
 router.delete('/:id', isLoggedIn, isAuthor, catchAsync(campgrounds.deleteCampground));
