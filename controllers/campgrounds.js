@@ -25,7 +25,7 @@ module.exports.createCampground = async (req, res, next) => {
     await campground.save(); // Then we save
     console.log(campground); // We then print out the created campground, which will include the latitude and longitude coordinates
     req.flash('success', 'Successfully Made A New Campground!');
-    res.redirect(`/campgrounds/${campground._id}`)
+    res.redirect(`/campgrounds/${campground._id}`);
 }
 
 module.exports.showCampground = async (req, res) => {
