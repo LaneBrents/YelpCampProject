@@ -1,7 +1,7 @@
 const Campground = require('../models/campground');
 const mbxGeocoding = require("@mapbox/mapbox-sdk/services/geocoding");
 const mapBoxToken = process.env.MAPBOX_TOKEN;
-const geocoder = mbxGeocoding({ accessToken: mapBoxToken }); //Contains forward and reverse geocode methods
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken }); // Contains forward and reverse geocode methods
 const { cloudinary } = require('../cloudinary');
 
 module.exports.index = async (req, res) => {
@@ -18,12 +18,12 @@ module.exports.createCampground = async (req, res, next) => {
         query: req.body.campground.location,
         limit: 1
     }).send()
-    res.send(geoData.body.features[0].geometry.coordinates);
-    const campground = new Campground(req.body.campground);
-    campground.images = req.files.map(f => ({ url: f.path, filename: f.filename }));
-    campground.author = req.user._id;
-    await campground.save();
-    console.log(campground)
+    const campground = new Campground(req.body.campground); // We make the campground with the info from req.body.campground
+    campground.geometry = geoData.body.features[0].geometry; // Then we add on geometry which is coming from our geocoding api
+    campground.images = req.files.map(f => ({ url: f.path, filename: f.filename })); // We go ahead and add our image files from cloudinary
+    campground.author = req.user._id; // Then we set the author as the currently logged in author
+    await campground.save(); // Then we save
+    console.log(campground); // We then print out the created campground, which will include the latitude and longitude coordinates
     req.flash('success', 'Successfully Made A New Campground!');
     res.redirect(`/campgrounds/${campground._id}`)
 }
