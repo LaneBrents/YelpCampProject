@@ -11,15 +11,15 @@ YelpCamp is a Yelp-like website that allows users to create and review campgroun
 
 ## Planning
 ---
-![](https://imgur.com/nwkmJsF)
-![](https://imgur.com/usLiPel)
+![trello](https://i.imgur.com/nwkmJsF.png)
+![ERD](https://imgur.com/usLiPel)
 
 ## Screenshots of App
 ---
-![](https://imgur.com/dEUrTxI)
-![](https://imgur.com/cT20OmS)
-![](https://imgur.com/U2YGwyr)
-![](https://imgur.com/YqjqMb5)
+![home](https://imgur.com/dEUrTxI)
+![main](https://imgur.com/cT20OmS)
+![add](https://imgur.com/U2YGwyr)
+![edit](https://imgur.com/YqjqMb5)
 
 ## Technologies Used
 ---
