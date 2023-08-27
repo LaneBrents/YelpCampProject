@@ -1,20 +1,44 @@
-# <center> <span style="font-size: 50px; font-family:Papyrus; color:dodgerblue; ">YelpCamp </span> </center>
+# <span>YelpCamp </span>
 ---
 
-# <span style="font-family:Papyrus; color:dodgerblue">Getting Started</span>
+# <span>Getting Started</span>
+---
+Click [here](heroku link here) to deploy app.
+
+# <span>What is YelpCamp?</span>
 ---
 
-# <span style="font-family:Papyrus; color:dodgerblue">What is YelpCamp?</span>
+# <span>Planning</span>
+---
+![](img url from imgr)
+![](img url from imgr)
+
+# <span>Screenshots of App</span>
 ---
 
-# <span style="font-family:Papyrus; color:dodgerblue">Planning</span>
+# <span>Technologies Used</span>
 ---
+* EJS
+* Javascript
+* HTML
+* CSS
+* Bootstrap 
+* Express
+* Node
+* Flash
+* Passport
+* MongoDB
+* Heroku
 
-# <span style="font-family:Papyrus; color:dodgerblue">Screenshots of App</span>
+# <span>Learning Objectives</span>
 ---
-
-# <span style="font-family:Papyrus; color:dodgerblue">Technologies Used</span>
----
-
-# <span style="font-family:Papyrus; color:dodgerblue">Learning Objectives</span>
----
+Some learning objectives I focused on during development include:
+* Mongoose middleware
+* Image upload to a database
+* Structuring mongo databases
+* Creating virtual properties
+* Protecting routes with authorization
+* Having authentication on all users
+* Utilizing CRUD on campgrounds and reviews
+* Having an interactive map using Geocoding
+* Security features for mongo injection and cross site scripting
