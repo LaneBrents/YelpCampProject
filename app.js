@@ -21,10 +21,10 @@ const userRoutes = require('./routes/users');
 const campgroundRoutes = require('./routes/campgrounds.js');
 const reviewRoutes = require('./routes/reviews.js');
 
-//const dbUrl = process.env.DATABASE_URL;
-// mongoose.connect(dbUrl); 
-const dbUrl = 'mongodb://localhost:27017/YelpCampProject';
+const dbUrl = process.env.DATABASE_URL;
 mongoose.connect(dbUrl); 
+// const dbUrl = 'mongodb://localhost:27017/YelpCampProject';
+// mongoose.connect(dbUrl); 
 
 // Logic to check if there is an error
 const db = mongoose.connection;
@@ -44,11 +44,13 @@ app.use(methodOverride('_method'))
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(mongoSanitize())
 
+const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
+
 const store = MongoStore.create({
     mongoUrl: dbUrl,
     touchAfter: 24 * 60 * 60,
     crypto: {
-        secret: 'thisshouldbeabettersecret!'
+        secret,
     }
 });
 
@@ -58,7 +60,7 @@ store.on('error', function (e) {
 
 const sessionConfig = {
     store,
-    secret: 'thisisnotagoodsecret',
+    secret,
     resave: false,
     saveUnitialized: true,
     cookie: {
@@ -67,6 +69,7 @@ const sessionConfig = {
         maxAge: 1000 * 60 * 60 * 24 * 7
     }
 }
+
 app.use(session(sessionConfig));
 app.use(flash());
 
@@ -76,7 +79,6 @@ passport.use(new LocalStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser()); //How to store the user in the session
 passport.deserializeUser(User.deserializeUser()); //How to un-store the user from the session
-
 
 
 // Universal Flash middleware
@@ -93,14 +95,9 @@ app.use('/', userRoutes);
 app.use('/campgrounds', campgroundRoutes)
 app.use('/campgrounds/:id/reviews', reviewRoutes)
 
-
-
-
 app.get('/', (req, res) => {
     res.render('home')
 });
-
-
 
 
 // Catch-all error
@@ -108,12 +105,13 @@ app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
 })
 
-// Cath-all error
+// Catch-all error
 app.use((err, req, res, next) => {
     const { statusCode = 500 } = err;
     if (!err.message) err.message = 'Oh No, Something Went Wrong!'
     res.status(statusCode).render('error', { err });
 })
+
 
 app.listen(3000, () => {
     console.log('Serving on port 3000')
