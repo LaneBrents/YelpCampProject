@@ -36,13 +36,13 @@ db.once("open", () => {
 const app = express();
 
 app.engine('ejs', ejsMate);
+app.set('views', './views');
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'))
 
-app.use(express.urlencoded({ extended: true }))
-app.use(methodOverride('_method'))
-app.use(express.static(path.join(__dirname, 'public')))
-app.use(mongoSanitize())
+app.use(express.urlencoded({ extended: true }));
+app.use(methodOverride('_method'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(mongoSanitize());
 
 const secret = process.env.SECRET || 'thisshouldbeabettersecret!';
 
