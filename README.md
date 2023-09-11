@@ -3,7 +3,7 @@
 
 ## Getting Started
 ---
-Click [here]([https://whispering-castle-59822-2ec7cedb7a4f.herokuapp.com/](https://lane-yelpcamp-ffcd5feadb7a.herokuapp.com/) to deploy app.
+Click [here](https://lane-yelpcamp-ffcd5feadb7a.herokuapp.com/) to deploy app.
 
 ## What is YelpCamp?
 ---
